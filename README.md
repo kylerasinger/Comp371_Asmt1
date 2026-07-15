@@ -1,4 +1,4 @@
-\# Comp 371 Asmt 1
+# Comp 371 Asmt 1
 
 Summer 2026
 
