@@ -1,0 +1,3 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Comp371_Asmt1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Comp371_Asmt1_Part1.cpp
+  Comp371_Asmt1.vcxproj -> C:\Users\kyler\OneDrive\Desktop\Programming\2026\Comp371_Computer_Graphics\Comp371_Asmt1\Comp371_Asmt1\Debug\Comp371_Asmt1_Part1.exe
