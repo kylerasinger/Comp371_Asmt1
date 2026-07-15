@@ -1,10 +1,12 @@
 # Comp 371 Asmt 1
 
 Summer 2026
-40247163
-40281850 
-40284702
+- 40247163
+- 40281850 
+- 40284702
+
 ---
+
 How to use
 You need visual studio, I'm using Visual Studio 2019
 
