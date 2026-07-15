@@ -7,7 +7,7 @@ Summer 2026
 
 ---
 
-How to use
+## How to use
 You need visual studio, I'm using Visual Studio 2019
 
 1. Go into ./Comp371_Asmt1/
