@@ -3,6 +3,8 @@
 #include <iostream>
 #include "Point.h"
 #include "Triangle.h"
+#include <memory>
+
 using namespace std;
 
 void printMenu() {
@@ -16,7 +18,7 @@ void printMenu() {
 }
 
 int main() {
-    Triangle* myTriangle = new Triangle();
+    unique_ptr<Triangle> myTriangle = make_unique<Triangle>();
     int choice;
 
     do {
@@ -39,19 +41,38 @@ int main() {
                 cin >> x >> y >> z;
                 Point p3(x, y, z);
 
-                delete myTriangle;
-                myTriangle = new Triangle(p1, p2, p3);
+                myTriangle = make_unique<Triangle>(p1, p2, p3);
+
 
                 cout << "Triangle successfully created.\n";
                 break;   
             }
             case 2: {
+				int distance;
+                char axis;
+
+                cout << "Enter translation distance: ";
+                cin >> distance;
+                
+				cout << "Enter axis (x, y, or z): ";
+				cin >> axis;
+
+				if (myTriangle->translate(distance, axis) == -1) {
+					cout << "Invalid translation. Please enter x, y, or z.\n";
+				}
+				else {
+					cout << "Triangle successfully translated.\n";
+				}
+
                 break;
             }
             case 3: {
+         
+				myTriangle->display();
                 break;
             }
             case 4: {
+                cout << "The area of the triangle is: " << myTriangle->calcArea() << endl;
                 break;
             }
             case 5: {
@@ -62,9 +83,9 @@ int main() {
                 cout << "Invalid choice. Please try again.\n";
                 break;
             }
+         
         }
-    } while(choice != 5);
+    }while(choice != 5);
 
-    delete myTriangle;
     return 0;
 }

@@ -2,11 +2,9 @@
 #include <iostream>
 using namespace std;
 
-Point::Point(int x, int y, int z) {
-    this->x = x;
-    this->y = y;
-    this->z = z; 
-}
+Point::Point(int x, int y, int z) : x(x), y(y), z(z) {}
+
+Point::Point(const Point& other) : x(other.x), y(other.y), z(other.z) {}
 
 Point::~Point() {}
 
