@@ -2,53 +2,40 @@
 #include <iostream>
 #include <limits>
 
-class DynamicArray
-{
-private:
-    int* data;  // points to allocated memory for data
-    int  sizeOfArray;
 
-public:
-    DynamicArray() : data(nullptr), sizeOfArray(0) {}
-
-    ~DynamicArray() {
-        // RAII pattern, prevents mem leaks by deleting memory when object destroys (goes out of scope) 
-        deleteArray();
+int* createArray(int requestedSize) {
+    if (requestedSize <= 0) {
+        return nullptr;
     }
+    // Dynamically allocate memory on the heap
+    return new int[requestedSize];
+}
 
-    int* createArray(int requestedSize) {
-        // prevents reallocating over an existing array
-        deleteArray();
+// deleteArray: deallocates the memory and resets to the empty state.
+void deleteArray(int* &data) {
+    delete[] data;    // release the memory, knows its size due to "data"s metadata
+    data = nullptr;   // release pointer, now pointing to garbage mem
+}
 
-        sizeOfArray = requestedSize;
-        data = new int[sizeOfArray];  // dynamic alloc, need to remember to delete or we get a memory leak
-        return data;
+void initializeArray(int* arr, int sizeOfArray) {
+    if (arr == nullptr) return;
+
+    for (int i = 0; i < sizeOfArray; ++i) {
+        arr[i] = i;
     }
+}
 
-    // deleteArray: deallocates the memory and resets to the empty state.
-    void deleteArray() {
-        delete[] data;    // release the memory, knows its size due to "data"s metadata
-        data = nullptr;   // release pointer, now pointing to garbage mem
-        sizeOfArray = 0;
-    }
-
-    void initializeArray() {
-        for (int i = 0; i < sizeOfArray; ++i) {
-            data[i] = i;
+void printArray(const int* data, int sizeOfArray) {
+    std::cout << "Array (" << sizeOfArray << " elements): [";
+    for (int i = 0; i < sizeOfArray; ++i) {
+        std::cout << data[i];
+        if (i < sizeOfArray - 1) {
+            std::cout << ", ";
         }
     }
+    std::cout << "]\n";
+}
 
-    void printArray() const {
-        std::cout << "Array (" << sizeOfArray << " elements): [";
-        for (int i = 0; i < sizeOfArray; ++i) {
-            std::cout << data[i];
-            if (i < sizeOfArray - 1) {
-                std::cout << ", ";
-            }
-        }
-        std::cout << "]\n";
-    }
-};
 
 int main() {
     int size = 0;
@@ -63,13 +50,11 @@ int main() {
     }
 
     {
-        DynamicArray array;
-
-        array.createArray(size);
-        array.initializeArray();
-        array.printArray();
-        array.deleteArray(); // could remove this, and it would still free the memory due to the destructor
-    } // destructs here, when the program leaves its scope, calling its destructor
+		int* simpleArray = createArray(size);
+		initializeArray(simpleArray, size);
+		printArray(simpleArray, size);
+		deleteArray(simpleArray); 
+    }
 
     return 0;
 }

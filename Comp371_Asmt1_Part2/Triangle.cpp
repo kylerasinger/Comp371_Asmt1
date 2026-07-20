@@ -29,7 +29,7 @@ int Triangle::translate(int d, char axis) {
 // based on heron formula https://bearboat.net/TriangleArea/Triangle.html
 double Triangle::calcArea() {
 	if (vertex_1 == nullptr || vertex_2 == nullptr || vertex_3 == nullptr) {
-        return 0.0;
+        return -1;
     }
 	double a = sqrt(pow(vertex_2->getX() - vertex_1->getX(), 2) +
 		pow(vertex_2->getY() - vertex_1->getY(), 2) +
